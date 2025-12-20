@@ -1,0 +1,125 @@
+/* 全体設定 */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* ヘッダー */
+header {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* コンテンツ全体 */
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* セクション共通 */
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+h2 {
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+}
+
+/* プロフィール */
+.profile-img {
+    width: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 15px 0;
+}
+
+/* リスト */
+ul {
+    padding-left: 20px;
+}
+
+/* リンク */
+.link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* テーブル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #eaf2fb;
+}
+
+/* フォーム */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #357abd;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    color: #777;
+}

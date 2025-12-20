@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>初めてのHTML</title>
+    <link rel="stylesheet" href="../static/css/mypage.css">
+</head>
+<body>
+
+    <header>
+        <h1>Hello World!</h1>
+        <p class="subtitle">はじめてのWebページ</p>
+    </header>
+
+    <main class="container">
+
+        <section class="profile">
+            <h2>プロフィール</h2>
+            <img src="/static/image/mypage.jpg" alt="プロフィール画像" class="profile-img">
+            <p>こんにちは！私は <strong>Taro</strong> です。</p>
+
+            <ul>
+                <li>趣味：プログラミング</li>
+                <li>特技：Python</li>
+            </ul>
+
+            <a href="https://example.com" class="link" target="_blank">私のサイト</a>
+        </section>
+
+        <section>
+            <h2>基本情報</h2>
+            <table>
+                <tr>
+                    <th>名前</th>
+                    <th>年齢</th>
+                </tr>
+                <tr>
+                    <td>Taro</td>
+                    <td>25</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>お問い合わせ</h2>
+            <form>
+                <label>
+                    名前
+                    <input type="text" name="name">
+                </label>
+
+                <label>
+                    年齢
+                    <input type="number" name="age">
+                </label>
+
+                <input type="submit" value="送信">
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Taro</p>
+    </footer>
+
+</body>
+</html>
