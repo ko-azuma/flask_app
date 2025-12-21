@@ -1,18 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def home():
-    return "Hello, Flask!"
+    return render_template('home.html')
 
-@app.route("/mypage")
-def mypage():
-    return "マイページです"
-
-@app.route("/about")
+@app.route('/about')
 def about():
-    return "会社概要です"
+    return render_template('about.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/profile/<username>')
+def profile(username):
+    return render_template('profile.html', username=username)
+
+@app.route('/mypage')
+def mypage():
+    return render_template('mypage.html')
