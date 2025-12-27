@@ -12,7 +12,9 @@ def about():
 
 @app.route('/profile/<username>')
 def profile(username):
-    return render_template('profile.html', username=username)
+    age = 22
+    hobbies = ['プログラミング', '音楽', '映画鑑賞']
+    return render_template('profile.html', username=username, age=age, hobbies=hobbies)
 
 @app.route('/mypage')
 def mypage():

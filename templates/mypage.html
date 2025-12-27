@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>初めてのHTML</title>
-    <link rel="stylesheet" href="../static/css/mypage.css">
-</head>
-<body>
-
-    <header>
-        <h1>Hello World!</h1>
-        <p class="subtitle">はじめてのWebページ</p>
-    </header>
-
+{% extends "layout.html" %}
+{% block title %}初めてのHTML{% endblock %}
+{% block style %}<link rel="stylesheet" href="../static/css/mypage.css">{% endblock %}
+{% block content %}
     <main class="container">
 
         <section class="profile">
@@ -57,12 +47,5 @@
                 <input type="submit" value="送信">
             </form>
         </section>
-
     </main>
-
-    <footer>
-        <p>© 2025 Taro</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
