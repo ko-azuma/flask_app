@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}結果ページ{% endblock %}
+{% block content %}
+    <h1>結果</h1>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        <a href="/form">戻る</a>
+    {% else %}
+        <p>こんにちは、{{ front_name }}さん！誕生日は{{ front_birthday }} 、年齢は{{ front_age }}歳、血液型は{{ front_blood_type }}ですね。 </p>
+        <a href="/form">もう一度送信する</a>
+    {% endif %}
+{% endblock %}
