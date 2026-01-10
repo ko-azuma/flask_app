@@ -1,4 +1,6 @@
-from flask import Flask,request, render_template
+from flask import Flask,request, render_template,redirect,url_for
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
@@ -41,3 +43,39 @@ def submit():
 def search():
     query = request.args.get('q')
     return f'検索ワード: {query}'
+
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file.filename == '':
+            return 'ファイルが選択されていません'
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file', filename=filename))
+        else:
+            return '許可されていないファイル形式です'
+    return render_template('upload.html')
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return f'アップロード完了: <br><img src="/static/uploads/{filename}" width="300">'
+
+@app.route('/gallery')
+def gallery():
+    images = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template('gallery.html', images=images)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
