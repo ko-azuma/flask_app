@@ -1,8 +1,24 @@
 from flask import Flask,request, render_template,redirect,url_for
 from werkzeug.utils import secure_filename
 import os
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgre@localhost/mydb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    age = db.Column(db.Integer)
+
 
 @app.route('/')
 def home():
@@ -44,9 +60,6 @@ def search():
     query = request.args.get('q')
     return f'検索ワード: {query}'
 
-UPLOAD_FOLDER = 'static/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
@@ -76,6 +89,25 @@ def gallery():
     images = os.listdir(app.config['UPLOAD_FOLDER'])
     return render_template('gallery.html', images=images)
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        age = request.form['age']
+        user = User(name=name, age=age)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('users'))
+    return render_template('register.html')
+
+@app.route('/users')
+def users():
+    all_users = User.query.all()
+    return render_template('users.html', users=all_users)
+
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
 
